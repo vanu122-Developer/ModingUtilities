@@ -3,17 +3,28 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ZomboidMenu">
    <children>
-      <Label fx:id="PathLabel" layoutX="54.0" layoutY="277.0" text="Label" />
-      <Label fx:id="PathLabelDocument" layoutX="54.0" layoutY="307.0" text="Label" />
-      <Label layoutX="54.0" layoutY="252.0" text="Debug" />
+      <Label fx:id="PathLabel" layoutX="50.0" layoutY="346.0" text="Label" />
+      <Label fx:id="PathLabelDocument" layoutX="50.0" layoutY="364.0" text="Label" />
+      <Label layoutX="46.0" layoutY="328.0" text="Debug" />
       <TextField fx:id="DocumentFolder" layoutX="14.0" layoutY="32.0" prefHeight="26.0" prefWidth="336.0" />
       <Label layoutX="16.0" layoutY="14.0" text="Folder to your mod" />
       <TextField fx:id="NameModeFolder" layoutX="14.0" layoutY="87.0" prefHeight="26.0" prefWidth="149.0" />
       <Label layoutX="16.0" layoutY="69.0" text="Name your mod" />
       <Button fx:id="DoneButton" layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onAction="#ActionButtoneDone" text="Done" />
+      <Button fx:id="FolderButton" layoutX="356.0" layoutY="32.0" mnemonicParsing="false" onAction="#onChooseFolderClick" prefHeight="26.0" prefWidth="8.0">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/images/bluefolder.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
