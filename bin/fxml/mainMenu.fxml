@@ -92,7 +92,8 @@
           </font>
         </Label>
             <Button fx:id="CreateMod" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCreateModClick" text="Create mod" />
-            <ListView layoutX="14.0" layoutY="159.0" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="projectList" layoutX="14.0" layoutY="159.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="openProject" layoutX="114.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOpenProject" text="Open Project" />
       </children>
     </AnchorPane>
   </children>

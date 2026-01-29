@@ -50,7 +50,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.IDEController">
   <children>
       <MenuBar>
         <menus>
@@ -109,7 +109,7 @@
     </MenuBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="521.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane prefHeight="523.0" prefWidth="222.0">
+        <AnchorPane fx:id="FolderProjects" prefHeight="523.0" prefWidth="222.0">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
               <font>
@@ -126,7 +126,7 @@
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TextArea layoutY="4.0" prefHeight="515.0" prefWidth="435.0" />
+                        <TextArea fx:id="editorArea" layoutY="4.0" prefHeight="515.0" prefWidth="435.0" />
               </children>
             </AnchorPane>
           </content>

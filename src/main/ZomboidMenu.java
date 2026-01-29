@@ -7,11 +7,15 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import main.utils.ProjectConfig;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -28,6 +32,8 @@ public class ZomboidMenu {
 	@FXML
 	private Button DoneButton;
 	
+	//Name game
+	private String GameName = "Zomboid";
 	
 	//Save folder debug
 	public void setDocumentPath(String path) {
@@ -58,16 +64,20 @@ public class ZomboidMenu {
 	@FXML
 	private void ActionButtoneDone() {
 		try {
+			//Game path
+			String gamePath = PathLabelDocument.getText().trim();
 			//Folder document text
 			String basePath = DocumentFolder.getText().trim();
 			//Name folder mode
 			String folderName = NameModeFolder.getText().trim();
 			
+			//Not correct characters error
 			if (!isFolderNameValid(folderName)) {
 			    showAlert("Error", "Folder name contains invalid characters");
 			    return;
 			}
 			
+			//Else path empty error
 			if (basePath.isEmpty() || folderName.isEmpty()) {
 				showAlert("Error", "Path or folder name is empty");
 				return;
@@ -80,9 +90,53 @@ public class ZomboidMenu {
 //				showAlert("Success", "Folder created:\n" + newFolder);
 				createWorkshopStructure(Paths.get(basePath), folderName);
 				showAlert("Success", "Workshop mod created:\n"+ basePath + "/" + newFolder);
+				
+				
+				
 			} else {
 				showAlert("Info", "Folder already exists:\n" + newFolder);
 			}
+			
+			//----------------------------------
+			// === CREATE PROJECT FILE IN DOCUMENTS/ModingUtilities ===
+			//
+			
+			// 1. Documents/ModingUtilities
+			Path documents = Path.of(System.getProperty("user.home"), "Documents");
+			Path appFolder = documents.resolve("ModingUtilities");
+			Files.createDirectories(appFolder);
+
+			// 2. Path to .proj file
+			Path projFile = appFolder.resolve(folderName + ".proj");
+
+			// 3. Create config object
+			ProjectConfig config = new ProjectConfig(
+			        folderName,
+			        GameName,
+			        gamePath,
+			        newFolder.toString()
+			);
+
+			// 4. Save .proj
+			config.save(projFile);
+
+			showAlert("Success", "Project file created:\n" + projFile);
+
+			//---------------------------------------
+			
+			//Open IDE program
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/IDE.fxml"));
+			Parent root = loader.load();
+			
+			Stage stage = new Stage();
+			stage.setTitle("IDE");
+			stage.setScene(new Scene(root));
+			stage.show();
+			
+			Stage currentStage = (Stage) DoneButton.getScene().getWindow();
+			currentStage.close();
+			
+			
 		} catch (IOException e) {
 			showAlert("Error", "Failed to create folder:\n" + e.getMessage());
 		}
@@ -102,7 +156,7 @@ public class ZomboidMenu {
 			DocumentFolder.setText(selectedDirectory.getAbsolutePath());
 		}
 	}
-	
+	//Check folder characters no conflict
 	private boolean isFolderNameValid(String name) {
 	    String invalid = "\\/:*?\"<>|";
 
@@ -177,7 +231,7 @@ public class ZomboidMenu {
 	}
 
 
-	
+	//show alert error or correct
 	private void showAlert(String title, String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(title);

@@ -9,8 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import main.utils.SteamFinder;
 
-//Код для SelectGameMenu
+//Code SelectGameMenu
 
 public class SelectGameMenu {
 	@FXML
@@ -53,9 +54,9 @@ public class SelectGameMenu {
 			
 			//Controllers
 			ZomboidMenu controller = loader.getController();
-			//Use find Zomboid Path on label
+			//Use find  Path on label
 			controller.setGamePath(SteamFinder.findZomboidPath());
-			//Use find Zomboid Path document on label
+			//Use find  Path document on label
 			controller.setDocumentPath(SteamFinder.findZomboidPathdocument());
 			controller.setDocumentPathTextField(SteamFinder.findZomboidPathdocument());
 			
